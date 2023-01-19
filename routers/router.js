@@ -20,9 +20,6 @@ router.post("/login",
 router.post("/checkTokens", UserController.checkTokens)
 router.get("/refresh", UserController.refresh)
 router.post("/logout", UserController.logout)
-router.get("check", (req, res) => {
-    res.json({message: "this is work!"})
-})
 
 
 module.exports = router;
