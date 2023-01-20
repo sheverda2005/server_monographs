@@ -30,30 +30,35 @@ class UserService {
     }
 
     async loginService (email, password, res) {
-        const existUser = await User.findOne({email})
-        if (!existUser) {
+        try {
+            const existUser = await User.findOne({email})
+            if (!existUser) {
             return res.status(400).json({
                 message: "Такого користувача не існує"
             })
-        }
-        const comparePassword = bcrypt.compare(password, existUser.password)
-        if (!comparePassword) {
-            return res.status(400).json({message: "Паролі не співпадають"})
-        }
-        const userData = {
-            email: existUser.email,
-            ActivationLink: existUser.activationLink,
-            name: existUser.name,
-            surName: existUser.surName,
-            lastName: existUser.lastName,
-            id: existUser.id,
-            isActivated: existUser.isActivated
-        }
-        const tokens = TokenService.generateTokens(userData)
-        await TokenService.saveRefreshToken(tokens.refreshToken, userData.id)
-        return {
-            ...tokens,
-            userData
+            }
+            const comparePassword = await bcrypt.compare(password, existUser.password)
+            if (!comparePassword) {
+                return res.status(400).json({message: "Паролі не співпадають"})
+            }
+            const userData = {
+                email: existUser.email,
+                ActivationLink: existUser.activationLink,
+                name: existUser.name,
+                surName: existUser.surName,
+                lastName: existUser.lastName,
+                id: existUser.id,
+                isActivated: existUser.isActivated
+         }
+            const tokens = TokenService.generateTokens(userData)
+            await TokenService.saveRefreshToken(tokens.refreshToken, userData.id)
+            return {
+                ...tokens,
+                 userData
+            }
+
+        } catch (e) {
+            console.log(e)
         }
     }
     async refresh (refreshToken, res) {
