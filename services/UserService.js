@@ -82,7 +82,7 @@ class UserService {
                 isActivated: user.isActivated
             }
             const tokens = TokenService.generateTokens(userData)
-            await TokenService.saveRefreshToken(tokens.refreshToken, userData.id)
+            await TokenService.saveRefreshToken(tokens.refreshToken, userData.email)
             return {
                 ...tokens,
                 userData
