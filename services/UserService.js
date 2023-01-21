@@ -64,7 +64,7 @@ class UserService {
     async refresh (refreshToken, res) {
         try {
             if (!refreshToken) {
-                return res.status(400).json({message: "Рефреш не знайдений"})
+                return res.status(400).json({message: "Рефреш не знайдений" + refreshToken})
             }
             const compareToken = TokenService.compareRefreshToken(refreshToken)
             const user = await User.findOne({email: compareToken.email})
