@@ -17,6 +17,7 @@ class TokensService {
             return  await existToken.save();
         }
         const refreshTokenForDB = new RefreshToken({refreshToken, user: email})
+        console.log(refreshTokenForDB)
         const result = await refreshTokenForDB.save()
     }
 
