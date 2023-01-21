@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
     credentials: true,
-    origin: "https://monographs.vercel.app"
+    origin: "http://localhost:3000"
 }))
 app.use("/api", router)
 
