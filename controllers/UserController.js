@@ -13,7 +13,7 @@ class UserController {
             }
             const {email, name, password, lastName, surName} = req.body
             const data = await UserService.registrationService(email, name, password, lastName, surName, res)
-            res.cookie("refreshToken", data.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true, domain: 'monographs.vercel.app', secure: true, path: "/"})
+            res.cookie("refreshToken", data.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true, domain: 'server-monographs.vercel.app', secure: true, path: "/"})
             res.json(data)
         } catch (e) {
             next(e)
@@ -30,7 +30,7 @@ class UserController {
              }
              const {email, password} = req.body
              const data = await UserService.loginService(email, password, res)
-             res.cookie("refreshToken", data.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true, domain: 'monographs.vercel.app', secure: true, path: "/"})
+             res.cookie("refreshToken", data.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true, domain: 'server-monographs.vercel.app', secure: true, path: "/"})
              res.json(data)
              
          } catch (e) {
@@ -42,7 +42,7 @@ class UserController {
          try {
              const {refreshToken} = req.cookies
              const userData = await UserService.refresh(refreshToken, res)
-             res.cookie("refreshToken", data.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true, domain: 'monographs.vercel.app', secure: true, path: "/"})
+             res.cookie("refreshToken", data.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true, domain: 'server-monographs.vercel.app', secure: true, path: "/"})
              return res.json(userData)
              
          } catch (e) {
