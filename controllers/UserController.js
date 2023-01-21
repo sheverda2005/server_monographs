@@ -30,8 +30,8 @@ class UserController {
              }
              const {email, password} = req.body
              const data = await UserService.loginService(email, password, res)
-             res.cookie("refreshToken", data.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true})
-            //  res.setHeader("Set-Cookie", cookie.serialize("refreshToken", data.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true}))
+            //  res.cookie("refreshToken", data.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true})
+             res.setHeader("Set-Cookie", cookie.serialize("refreshToken", data.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true}))
              res.json(data)
              
          } catch (e) {
