@@ -7,8 +7,7 @@ const refreshToken = new Schema({
         require: true
     },
     user: {
-        type: Schema.Types.ObjectId,
-        ref: "User"
+        type: String
     }
 })
 
