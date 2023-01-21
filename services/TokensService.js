@@ -13,12 +13,13 @@ class TokensService {
     async saveRefreshToken (refreshToken, id) {
         const existToken = await RefreshToken.findOne({id})
         if (existToken) {
+            console.log(refreshToken)
             existToken.refreshToken = refreshToken
-           await existToken.save()
-           return;
+            return  await existToken.save();
         }
-        const token = new RefreshToken({refreshToken, user: id})
-        await token.save()
+        const refreshTokenForDB = new RefreshToken({refreshToken, user: id})
+        const result = await refreshTokenForDB.save()
+        console.log(result)
     }
 
     compareRefreshToken (refreshToken) {
