@@ -13,6 +13,8 @@ class UserController {
             }
             const {email, name, password, lastName, surName} = req.body
             const data = await UserService.registrationService(email, name, password, lastName, surName, res)
+            res.header('Access-Control-Allow-Origin', 'https://monographs.vercel.app');
+            res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
             res.cookie("refreshToken", data.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true, secure: true, sameSite: 'none'})
             res.json(data)
         } catch (e) {
@@ -30,6 +32,8 @@ class UserController {
              }
              const {email, password} = req.body
              const data = await UserService.loginService(email, password, res)
+             res.header('Access-Control-Allow-Origin', 'https://monographs.vercel.app');
+             res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
              res.cookie("refreshToken", data.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true, secure: true, sameSite: 'none'})
              res.json(data)
              
@@ -42,6 +46,8 @@ class UserController {
          try {
              const {refreshToken} = req.cookies
              const userData = await UserService.refresh(refreshToken, res)
+             res.header('Access-Control-Allow-Origin', 'https://monographs.vercel.app');
+             res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
              res.cookie("refreshToken", userData.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true, secure: true, sameSite: 'none'})
              return res.json(userData)
              
