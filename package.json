@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.3",
     "nodemon": "^2.0.20",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "vercel-cors": "^1.0.0"
   }
 }
